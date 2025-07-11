@@ -3,22 +3,30 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-// Import the WelcomeMessage component
+// Import custom components
 import WelcomeMessage from './components/WelcomeMessage'
+import Header from './components/Header'
+import MainContent from './components/mainContent'
+import Footer from './components/Footer'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      {/* Display the WelcomeMessage component */}
+      {/* New components */}
+      <Header />
+      <MainContent />
+      <Footer />
+
+      {/* Existing WelcomeMessage component */}
       <WelcomeMessage />
 
       <div>
-        <a href="https://vite.dev" target="_blank">
+        <a href="https://vite.dev" target="_blank" rel="noopener noreferrer">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
-        <a href="https://react.dev" target="_blank">
+        <a href="https://react.dev" target="_blank" rel="noopener noreferrer">
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
