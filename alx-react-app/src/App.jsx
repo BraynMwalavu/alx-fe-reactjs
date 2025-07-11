@@ -6,7 +6,7 @@ import './App.css'
 // Import custom components
 import WelcomeMessage from './components/WelcomeMessage'
 import Header from './components/Header'
-import MainContent from './components/mainContent'
+import MainContent from './components/MainContent'
 import Footer from './components/Footer'
 
 function App() {
@@ -17,7 +17,6 @@ function App() {
       {/* New components */}
       <Header />
       <MainContent />
-      <Footer />
 
       {/* Existing WelcomeMessage component */}
       <WelcomeMessage />
@@ -42,6 +41,7 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+         <Footer />
     </>
   )
 }
