@@ -24,7 +24,8 @@ function App() {
       <WelcomeMessage />
 
        {/* User Profiles */}
-        <UserProfile name="Brian" age="28" bio="Front-end developer learning React at ALX." />
+       <UserProfile name="Alice" age="25" bio="Loves hiking and photography." />
+       <UserProfile name="Brian" age="28" bio="Front-end developer learning React at ALX." />
 
       <div>
         <a href="https://vite.dev" target="_blank" rel="noopener noreferrer">
