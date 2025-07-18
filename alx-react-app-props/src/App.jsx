@@ -9,13 +9,13 @@ import Header from './components/Header';
 import MainContent from './components/MainContent';
 import Footer from './components/Footer';
 import UserProfile from './components/UserProfile';
-import Counter from './components/Counter'; // Include if Counter.jsx exists
-import UserContext from './components/UserContext';
+import Counter from './components/Counter';
+import ProfilePage from './components/ProfilePage'; // Added
+import UserContext from './components/UserContext';  // Added
 
 function App() {
   const [count, setCount] = useState(0);
 
-  // User data now provided via Context API
   const userData = {
     name: "Brian Mwalavu",
     age: 28,
@@ -27,11 +27,14 @@ function App() {
     <UserContext.Provider value={userData}>
       <Header />
       <MainContent />
-
       <WelcomeMessage />
 
-      {/* UserProfile now uses context instead of props */}
-      <UserProfile />
+      {/* UserProfiles from Task 1 (still using props) */}
+      <UserProfile name="Alice" age="25" bio="Loves hiking and photography." />
+      <UserProfile name="Brian" age="28" bio="Front-end developer learning React at ALX." />
+
+      {/* Context API section */}
+      <ProfilePage />
 
       <Counter />
 
