@@ -1,3 +1,4 @@
+// src/components/recipeStore.js
 import { create } from 'zustand';
 
 export const useRecipeStore = create((set) => ({
@@ -7,6 +8,13 @@ export const useRecipeStore = create((set) => ({
   recommendations: [],
   searchTerm: '',
   currentRecipe: null, // ✅ For edit context
+
+  // Set full recipe list (used for syncing or loading)
+  setRecipes: (newRecipes) =>
+    set(() => ({
+      recipes: newRecipes,
+      filteredRecipes: newRecipes,
+    })),
 
   // Search and filter
   setSearchTerm: (term) => set({ searchTerm: term }),
