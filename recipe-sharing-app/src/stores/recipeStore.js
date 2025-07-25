@@ -6,6 +6,7 @@ export const useRecipeStore = create((set) => ({
   favorites: [],
   recommendations: [],
   searchTerm: '',
+  currentRecipe: null, // ✅ For edit context
 
   // Search and filter
   setSearchTerm: (term) => set({ searchTerm: term }),
@@ -16,10 +17,19 @@ export const useRecipeStore = create((set) => ({
       ),
     })),
 
+  // Set current recipe (for editing)
+  setCurrentRecipe: (recipe) => set({ currentRecipe: recipe }),
+  clearCurrentRecipe: () => set({ currentRecipe: null }),
+
   // Recipe management
   addRecipe: (recipe) =>
     set((state) => {
-      const updated = [...state.recipes, recipe];
+      const id = recipe.id || Date.now().toString(); // Ensures each recipe has a unique ID
+      if (!recipe.id) {
+        console.warn("⚠️ Recipe missing ID. Generated fallback ID:", id);
+      }
+      const newRecipe = { ...recipe, id };
+      const updated = [...state.recipes, newRecipe];
       return {
         recipes: updated,
         filteredRecipes: updated,
@@ -34,6 +44,7 @@ export const useRecipeStore = create((set) => ({
       return {
         recipes: updatedRecipes,
         filteredRecipes: updatedRecipes,
+        currentRecipe: null, // ✅ Clear current after update
       };
     }),
 
@@ -43,14 +54,14 @@ export const useRecipeStore = create((set) => ({
       return {
         recipes: updatedRecipes,
         filteredRecipes: updatedRecipes,
-        favorites: state.favorites.filter(favId => favId !== id), // Remove from favorites if deleted
+        favorites: state.favorites.filter(favId => favId !== id),
       };
     }),
 
   // Favorites
   addFavorite: (recipeId) =>
     set((state) => ({
-      favorites: [...new Set([...state.favorites, recipeId])], // avoid duplicates
+      favorites: [...new Set([...state.favorites, recipeId])],
     })),
 
   removeFavorite: (recipeId) =>
@@ -58,7 +69,7 @@ export const useRecipeStore = create((set) => ({
       favorites: state.favorites.filter((id) => id !== recipeId),
     })),
 
-  // Recommendations (mock logic for now)
+  // Recommendations (mock logic)
   generateRecommendations: () =>
     set((state) => {
       const recommended = state.recipes.filter(

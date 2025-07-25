@@ -1,50 +1,22 @@
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useRecipeStore } from '../stores/recipeStore';
-import EditRecipeForm from './EditRecipeForm';
-import DeleteRecipeButton from './DeleteRecipeButton';
 
 const RecipeDetails = () => {
   const { id } = useParams();
-  const recipeId = Number(id);
-
-  const {
-    recipes,
-    favorites,
-    addFavorite,
-    removeFavorite,
-  } = useRecipeStore((state) => ({
-    recipes: state.recipes,
-    favorites: state.favorites,
-    addFavorite: state.addFavorite,
-    removeFavorite: state.removeFavorite,
-  }));
-
-  const recipe = recipes.find((r) => r.id === recipeId);
-  const isFavorite = favorites.includes(recipeId);
+  const recipe = useRecipeStore((state) =>
+    state.recipes.find((r) => String(r.id) === id)
+  );
 
   if (!recipe) return <p>Recipe not found.</p>;
 
-  const toggleFavorite = () => {
-    if (isFavorite) {
-      removeFavorite(recipeId);
-    } else {
-      addFavorite(recipeId);
-    }
-  };
-
   return (
-    <div>
-      <h2>{recipe.title}</h2>
-      <p>{recipe.description}</p>
-      <p><strong>Ingredients:</strong> {recipe.ingredients}</p>
-      <p><strong>Instructions:</strong> {recipe.instructions}</p>
+    <div className="section-spacing">
+      <h2 className="section-title">{recipe.title}</h2>
+      <p className="paragraph">{recipe.instructions}</p>
 
-      <button onClick={toggleFavorite} style={{ marginBottom: '10px' }}>
-        {isFavorite ? '💔 Remove from Favorites' : '❤️ Add to Favorites'}
-      </button>
-
-      <EditRecipeForm recipe={recipe} />
-      <DeleteRecipeButton recipeId={recipe.id} />
+      <Link to={`/edit/${recipe.id}`} className="button-secondary">
+        Edit Recipe
+      </Link>
     </div>
   );
 };

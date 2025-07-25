@@ -1,23 +1,23 @@
-import React from 'react';
-import { Link } from 'react-router-dom'; // Must import Link
+import { Link } from 'react-router-dom';
 import { useRecipeStore } from '../stores/recipeStore';
 
-function RecipeList() {
-  const recipes = useRecipeStore((state) => state.filteredRecipes);
+const RecipeList = () => {
+  const recipes = useRecipeStore((state) => state.recipes);
 
   return (
-    <div>
-      <h2>Recipe List</h2>
-      <ul>
+    <div className="section-spacing">
+      <h2 className="section-title">Recipe List</h2>
+      <ul className="list">
         {recipes.map((recipe) => (
-          <li key={recipe.id}>
-            {/* Link to recipe detail page */}
-            <Link to={`/recipe/${recipe.id}`}>{recipe.title}</Link>
+          <li key={recipe.id} className="list-item">
+            <Link to={`/recipe/${recipe.id}`} className="link">
+              {recipe.title}
+            </Link>
           </li>
         ))}
       </ul>
     </div>
   );
-}
+};
 
 export default RecipeList;

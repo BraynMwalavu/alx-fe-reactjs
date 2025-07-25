@@ -1,48 +1,54 @@
-import { useState } from 'react';
-import {useRecipeStore} from '../stores/recipeStore';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useRecipeStore } from '../stores/recipeStore';
 
-const EditRecipeForm = ({ recipe }) => {
+const EditRecipeForm = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const recipe = useRecipeStore((state) =>
+    state.recipes.find((r) => String(r.id) === id)
+  );
   const updateRecipe = useRecipeStore((state) => state.updateRecipe);
-  const [formData, setFormData] = useState({ ...recipe });
 
-  const handleChange = (event) => {
-    setFormData({ ...formData, [event.target.name]: event.target.value });
+  const [title, setTitle] = useState('');
+  const [instructions, setInstructions] = useState('');
+
+  useEffect(() => {
+    if (recipe) {
+      setTitle(recipe.title);
+      setInstructions(recipe.instructions);
+    }
+  }, [recipe]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!title || !instructions) return;
+    updateRecipe({ id: recipe.id, title, instructions });
+    navigate('/');
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault(); 
-    updateRecipe(formData);
-  };
+  if (!recipe) return <p>Recipe not found.</p>;
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h3>Edit Recipe</h3>
+    <form className="form" onSubmit={handleSubmit}>
+      <h2 className="form-heading">Edit Recipe</h2>
+
       <input
         type="text"
-        name="title"
-        value={formData.title}
-        onChange={handleChange}
-        placeholder="Title"
+        placeholder="Recipe title"
+        className="input"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
       />
+
       <textarea
-        name="description"
-        value={formData.description}
-        onChange={handleChange}
-        placeholder="Description"
-      />
-      <textarea
-        name="ingredients"
-        value={formData.ingredients}
-        onChange={handleChange}
-        placeholder="Ingredients"
-      />
-      <textarea
-        name="instructions"
-        value={formData.instructions}
-        onChange={handleChange}
         placeholder="Instructions"
+        className="textarea"
+        value={instructions}
+        onChange={(e) => setInstructions(e.target.value)}
       />
-      <button type="submit">Update</button>
+
+      <button type="submit" className="button-primary">Save Changes</button>
     </form>
   );
 };
