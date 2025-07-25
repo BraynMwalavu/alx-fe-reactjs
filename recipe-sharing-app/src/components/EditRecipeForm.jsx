@@ -20,8 +20,8 @@ const EditRecipeForm = () => {
     }
   }, [recipe]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault(); 
     if (!title || !instructions) return;
     updateRecipe({ id: recipe.id, title, instructions });
     navigate('/');
@@ -38,14 +38,14 @@ const EditRecipeForm = () => {
         placeholder="Recipe title"
         className="input"
         value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={(event) => setTitle(event.target.value)}
       />
 
       <textarea
         placeholder="Instructions"
         className="textarea"
         value={instructions}
-        onChange={(e) => setInstructions(e.target.value)}
+        onChange={(event) => setInstructions(event.target.value)}
       />
 
       <button type="submit" className="button-primary">Save Changes</button>
