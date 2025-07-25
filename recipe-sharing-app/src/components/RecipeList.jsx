@@ -1,19 +1,20 @@
-import useRecipeStore from './recipeStore';
+import { Link } from 'react-router-dom';
+import useRecipeStore from '../stores/recipeStore';
 
 const RecipeList = () => {
   const recipes = useRecipeStore((state) => state.recipes);
-  const removeRecipe = useRecipeStore((state) => state.removeRecipe);
 
   return (
-    <ul>
-      {recipes.map((recipe, index) => (
-        <li key={index}>
-          <h3>{recipe.title}</h3>
-          <p>{recipe.description}</p>
-          <button onClick={() => removeRecipe(index)}>❌</button>
-        </li>
-      ))}
-    </ul>
+    <div>
+      <h2>Recipes</h2>
+      <ul>
+        {recipes.map((recipe) => (
+          <li key={recipe.id}>
+            <Link to={`/recipe/${recipe.id}`}>{recipe.title}</Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 
