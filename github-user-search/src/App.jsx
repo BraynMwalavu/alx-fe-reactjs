@@ -3,18 +3,18 @@ import Search from "./components/Search";
 import { fetchUserData } from "./services/githubService";
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
   const handleSearch = async (query) => {
     setLoading(true);
     setError(false);
-    setUser(null);
+    setUsers([]);
 
     try {
       const result = await fetchUserData(query);
-      setUser(result);
+      setUsers(result);
     } catch (err) {
       console.error("API Error:", err);
       setError(true);
@@ -39,24 +39,31 @@ function App() {
         </p>
       )}
 
-      {user && !error && (
-        <div className="mt-6 max-w-md mx-auto bg-white p-4 rounded shadow hover:shadow-md flex items-center gap-4">
-          <img
-            src={user.avatar_url}
-            alt={user.login}
-            className="w-16 h-16 rounded-full"
-          />
-          <div>
-            <p className="font-semibold">{user.login}</p>
-            <a
-              href={user.html_url}
-              target="_blank"
-              rel="noreferrer"
-              className="text-blue-600 underline"
+      {!loading && users.length > 0 && (
+        <div className="mt-6 grid gap-4 max-w-4xl mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          {users.map((user) => (
+            <div
+              key={user.id}
+              className="bg-white p-4 rounded shadow hover:shadow-md flex items-center gap-4"
             >
-              View Profile
-            </a>
-          </div>
+              <img
+                src={user.avatar_url}
+                alt={user.login}
+                className="w-16 h-16 rounded-full"
+              />
+              <div>
+                <p className="font-semibold">{user.login}</p>
+                <a
+                  href={user.html_url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-blue-600 underline"
+                >
+                  View Profile
+                </a>
+              </div>
+            </div>
+          ))}
         </div>
       )}
     </div>

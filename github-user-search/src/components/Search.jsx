@@ -1,70 +1,80 @@
 import { useState } from "react";
-import { searchUsers } from "../services/githubService";
+import { fetchUserData } from "../services/githubService";
 
 const Search = () => {
   const [query, setQuery] = useState("");
   const [users, setUsers] = useState([]);
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSearch = async (e) => {
     e.preventDefault();
-    if (!query.trim()) return;
-
     setLoading(true);
-    setError("");
+    setError(false);
     setUsers([]);
 
     try {
-      const userList = await searchUsers(query.trim());
-
-      if (userList.length === 0) {
-        setError("Looks like we cant find the user");
+      const result = await fetchUserData(query);
+      if (result.length === 0) {
+        setError(true);
       } else {
-        setUsers(userList);
+        setUsers(result);
       }
     } catch (err) {
-      setError("Something went wrong");
+      console.error(err);
+      setError(true);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="p-4">
-      <form onSubmit={handleSubmit} className="flex items-center gap-2 max-w-xl mx-auto">
+    <div>
+      <form onSubmit={handleSearch} className="flex justify-center gap-2 mb-4">
         <input
           type="text"
-          placeholder="Enter GitHub username"
-          className="flex-grow border rounded p-2"
+          placeholder="Search GitHub users..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
+          className="p-2 border rounded w-full max-w-md"
         />
-        <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">
+        <button
+          type="submit"
+          className="bg-blue-600 text-white px-4 py-2 rounded"
+        >
           Search
         </button>
       </form>
 
-      {loading && <p className="text-center mt-4">Loading...</p>}
-      {error && <p className="text-red-500 text-center mt-4">{error}</p>}
+      {loading && <p className="text-center text-gray-500">Loading...</p>}
+      {error && (
+        <p className="text-center text-red-600">
+          Looks like we cant find the user
+        </p>
+      )}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
+      <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6">
         {users.map((user) => (
-          <div key={user.id} className="p-4 border rounded shadow text-center">
+          <div
+            key={user.id}
+            className="bg-white p-4 rounded shadow hover:shadow-md flex items-center gap-4"
+          >
             <img
               src={user.avatar_url}
               alt={user.login}
-              className="w-20 h-20 rounded-full mx-auto mb-2"
+              className="w-16 h-16 rounded-full"
             />
-            <h2 className="text-lg font-semibold">{user.login}</h2>
-            <a
-              href={user.html_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-600"
-            >
-              View Profile
-            </a>
+            <div>
+              <p className="font-semibold">{user.login}</p>
+              <a
+                href={user.html_url}
+                target="_blank"
+                rel="noreferrer"
+                className="text-blue-600 underline"
+              >
+                View Profile
+              </a>
+            </div>
           </div>
         ))}
       </div>
