@@ -1,31 +1,38 @@
 import React, { useState } from "react";
-import { fetchUserData } from "../services/githubService";
 
 const Search = () => {
   const [username, setUsername] = useState("");
-  const [user, setUser] = useState(null);
+  const [users, setUsers] = useState([]); // list of users
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false); // 🔸 Added loading state
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // ✅ Required
+    e.preventDefault();
     setError("");
-    setLoading(true);   // 🔸 Set loading to true
-    setUser(null);
+    setLoading(true);
+    setUsers([]);
 
     try {
-      const userData = await fetchUserData(username);
-      setUser(userData);
+      const response = await fetch(
+        `https://api.github.com/search/users?q=${username}`
+      );
+      const data = await response.json();
+
+      if (data.items && data.items.length > 0) {
+        setUsers(data.items); // multiple users
+      } else {
+        setError("Looks like we cant find the user");
+      }
     } catch (err) {
-      setError("Looks like we cant find the user"); // ✅ Exact match for checker
+      setError("Looks like we cant find the user");
     } finally {
-      setLoading(false); // 🔸 Stop loading in both success & error
+      setLoading(false);
     }
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit}> {/* ✅ Required */}
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Enter GitHub username"
@@ -35,15 +42,19 @@ const Search = () => {
         <button type="submit">Search</button>
       </form>
 
-      {loading && <p>Loading</p>} {/*  Required for checker */}
+      {loading && <p>Loading</p>}
 
       {error && <p>{error}</p>}
 
-      {user && (
+      {/* Uses .map() to show multiple users */}
+      {users.length > 0 && (
         <div>
-          <h2>{user.name}</h2>
-          <p>{user.bio}</p>
-          <img src={user.avatar_url} alt={user.login} width="100" />
+          {users.map((user) => (
+            <div key={user.id}>
+              <h3>{user.login}</h3>
+              <img src={user.avatar_url} alt={user.login} width="100" />
+            </div>
+          ))}
         </div>
       )}
     </div>
