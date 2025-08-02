@@ -19,7 +19,7 @@ const Search = () => {
       const userList = await searchUsers(query.trim());
 
       if (userList.length === 0) {
-        setError("Looks like we can't find the user");
+        setError("Looks like we cant find the user");
       } else {
         setUsers(userList);
       }
