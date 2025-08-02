@@ -1,18 +1,16 @@
 import axios from "axios";
 
-const BASE_URL = "https://api.github.com";
-
-// Simple user fetch
-export const fetchUser = async (username) => {
+// Fetch a single user by username
+export const fetchUserData = async (username) => {
   try {
-    const response = await axios.get(`${BASE_URL}/users/${username}`);
+    const response = await axios.get(`https://api.github.com/users/${username}`);
     return response.data;
   } catch (error) {
-    throw error;
+    throw new Error("Unable to fetch user data");
   }
 };
 
-// Advanced user search
+// Advanced search for multiple users
 export const fetchAdvancedUsers = async (username, location, minRepos) => {
   const query = [
     username && `${username} in:login`,
@@ -23,21 +21,11 @@ export const fetchAdvancedUsers = async (username, location, minRepos) => {
     .join(" ");
 
   try {
-    const response = await axios.get(`${BASE_URL}/search/users`, {
-      params: { q: query }
-    });
+    const response = await axios.get(
+      `https://api.github.com/search/users?q=${encodeURIComponent(query)}`
+    );
     return response.data.items || [];
   } catch (error) {
-    throw error;
-  }
-};
-
-// Required for the checker
-export const fetchUserData = async (username) => {
-  try {
-    const response = await axios.get(`${BASE_URL}/users/${username}`);
-    return response.data;
-  } catch (error) {
-    throw error;
+    throw new Error("Unable to fetch search results");
   }
 };
