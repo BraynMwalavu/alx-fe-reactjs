@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { fetchAdvancedUsers } from "../services/githubService";
+import { fetchAdvancedUsers, fetchUserData } from "../services/githubService";
 
 const Search = () => {
   const [username, setUsername] = useState("");
@@ -16,9 +16,18 @@ const Search = () => {
     setLoading(true);
 
     try {
-      const data = await fetchAdvancedUsers(username, location, minRepos);
-      if (data.length > 0) {
-        setUsers(data);
+      const basicUsers = await fetchAdvancedUsers(username, location, minRepos);
+
+      // Fetch detailed data for each user
+      const detailedUsers = await Promise.all(
+        basicUsers.map(async (user) => {
+          const details = await fetchUserData(user.login);
+          return { ...user, ...details };
+        })
+      );
+
+      if (detailedUsers.length > 0) {
+        setUsers(detailedUsers);
       } else {
         setError("Looks like we cant find the user");
       }
@@ -62,12 +71,15 @@ const Search = () => {
             <div key={user.id}>
               <h3>{user.login}</h3>
               <img src={user.avatar_url} alt={user.login} width="100" />
-              {/* ✅ Add GitHub profile link using html_url */}
               <p>
                 <a href={user.html_url} target="_blank" rel="noopener noreferrer">
                   View Profile
                 </a>
               </p>
+              {/* ✅ Enhanced info from fetchUserData */}
+              <p>Bio: {user.bio || "No bio available"}</p>
+              <p>Followers: {user.followers}</p>
+              <p>Public Repos: {user.public_repos}</p>
             </div>
           ))}
         </div>
