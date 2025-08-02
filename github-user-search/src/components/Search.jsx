@@ -1,30 +1,29 @@
 import React, { useState } from "react";
+import { fetchAdvancedUsers } from "../services/githubService";
 
 const Search = () => {
   const [username, setUsername] = useState("");
+  const [location, setLocation] = useState("");
+  const [minRepos, setMinRepos] = useState("");
   const [users, setUsers] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Required by checker
+    e.preventDefault();
     setError("");
-    setLoading(true);
     setUsers([]);
+    setLoading(true);
 
     try {
-      const response = await fetch(
-        `https://api.github.com/search/users?q=${username}` // Required URL
-      );
-      const data = await response.json();
-
-      if (data.items && data.items.length > 0) {
-        setUsers(data.items); // map() will be used below
+      const data = await fetchAdvancedUsers(username, location, minRepos);
+      if (data.length > 0) {
+        setUsers(data);
       } else {
-        setError("Looks like we cant find the user"); // Note: no apostrophe
+        setError("Looks like we cant find the user");
       }
     } catch (err) {
-      setError("Looks like we cant find the user"); // Must be exact match
+      setError("Looks like we cant find the user");
     } finally {
       setLoading(false);
     }
@@ -35,15 +34,26 @@ const Search = () => {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Enter GitHub username"
+          placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Location"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+        />
+        <input
+          type="number"
+          placeholder="Min Repos"
+          value={minRepos}
+          onChange={(e) => setMinRepos(e.target.value)}
         />
         <button type="submit">Search</button>
       </form>
 
-      {loading && <p>Loading</p>} {/* Checker looks for this exact string */}
-
+      {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
 
       {users.length > 0 && (
