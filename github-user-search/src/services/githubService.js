@@ -1,24 +1,31 @@
 import axios from "axios";
 
-// Fetch a specific user by username
+const githubToken = import.meta.env.VITE_GITHUB_TOKEN;
+
+const axiosInstance = axios.create({
+  baseURL: "https://api.github.com",
+  headers: {
+    Authorization: githubToken ? `token ${githubToken}` : undefined,
+  },
+});
+
+// Fetch detailed user info
 export const fetchUserData = async (username) => {
   try {
-    const response = await axios.get(`https://api.github.com/users/${username}`);
+    const response = await axiosInstance.get(`/users/${username}`);
     return response.data;
   } catch (error) {
     throw new Error("User not found");
   }
 };
 
-// Advanced API integration - Search users by location and minimum repos
-export const searchGitHubUsers = async ({ location = "", minRepos = 0 }) => {
-  const query = `location:${location} repos:>${minRepos}`;
-  const url = `https://api.github.com/search/users?q=${encodeURIComponent(query)}`;
-
+// Advanced search by location and min repos
+export const searchUsers = async (location, minRepos) => {
   try {
-    const response = await axios.get(url);
-    return response.data.items; // Returns array of matching users
+    const query = `location:${location} repos:>=${minRepos}`;
+    const response = await axiosInstance.get(`/search/users?q=${query}`);
+    return response.data.items;
   } catch (error) {
-    throw new Error("Failed to search GitHub users");
+    throw new Error("Error fetching user search results");
   }
 };
