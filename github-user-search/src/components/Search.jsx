@@ -62,6 +62,12 @@ const Search = () => {
             <div key={user.id}>
               <h3>{user.login}</h3>
               <img src={user.avatar_url} alt={user.login} width="100" />
+              {/* ✅ Add GitHub profile link using html_url */}
+              <p>
+                <a href={user.html_url} target="_blank" rel="noopener noreferrer">
+                  View Profile
+                </a>
+              </p>
             </div>
           ))}
         </div>
