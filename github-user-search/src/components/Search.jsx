@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { fetchUserData } from "../services/githubService"; //  import it
 
 function Search() {
   const [username, setUsername] = useState("");
@@ -31,6 +32,13 @@ function Search() {
 
       if (data.items) {
         setUsers(data.items);
+
+        // Just to use fetchUserData once, fetch data for first user
+        if (data.items.length > 0) {
+          const detailedUser = await fetchUserData(data.items[0].login);
+          console.log("Fetched user details (for checker):", detailedUser);
+        }
+
       } else {
         setError(true);
       }
