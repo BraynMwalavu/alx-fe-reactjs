@@ -10,8 +10,8 @@ const UserProfile = ({ user }) => {
           alt={`${user.name}'s avatar`}
         />
         <div>
-          {/* Added text-lg, md:text-xl, text-blue-800, and my-4 for styling */}
-          <h2 className="text-lg md:text-xl text-blue-800 my-4 font-semibold">
+          {/* Added text-lg, md:text-xl, text-blue-800, my-4, and hover:text-blue-500 */}
+          <h2 className="text-lg md:text-xl text-blue-800 my-4 font-semibold hover:text-blue-500">
             {user.name}
           </h2>
           {/* Added text-sm for smaller text */}
@@ -19,8 +19,8 @@ const UserProfile = ({ user }) => {
         </div>
       </div>
       <div className="mt-4">
-        {/* Added text-base for paragraph styling */}
-        <p className="text-base text-gray-800">{user.bio}</p>
+        {/* Added text-base, hover:text-blue-500 for paragraph styling */}
+        <p className="text-base text-gray-800 hover:text-blue-500">{user.bio}</p>
       </div>
       <div className="mt-4 flex space-x-6">
         <div>
