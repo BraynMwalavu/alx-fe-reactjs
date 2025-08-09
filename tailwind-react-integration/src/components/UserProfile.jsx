@@ -10,8 +10,10 @@ const UserProfile = ({ user }) => {
           alt={`${user.name}'s avatar`}
         />
         <div>
-          {/* Added text-lg and md:text-xl for responsiveness */}
-          <h2 className="text-lg md:text-xl font-semibold">{user.name}</h2>
+          {/* Added text-lg, md:text-xl, text-blue-800, and my-4 for styling */}
+          <h2 className="text-lg md:text-xl text-blue-800 my-4 font-semibold">
+            {user.name}
+          </h2>
           {/* Added text-sm for smaller text */}
           <p className="text-sm text-gray-600">@{user.login}</p>
         </div>
