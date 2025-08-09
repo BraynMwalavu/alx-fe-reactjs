@@ -10,8 +10,10 @@ const UserProfile = ({ user }) => {
           alt={`${user.name}'s avatar`}
         />
         <div>
-          <h2 className="text-xl font-semibold">{user.name}</h2>
-          <p className="text-gray-600">@{user.login}</p>
+          {/* Added text-lg and md:text-xl for responsiveness */}
+          <h2 className="text-lg md:text-xl font-semibold">{user.name}</h2>
+          {/* Added text-sm for smaller text */}
+          <p className="text-sm text-gray-600">@{user.login}</p>
         </div>
       </div>
       <div className="mt-4">
@@ -19,13 +21,16 @@ const UserProfile = ({ user }) => {
       </div>
       <div className="mt-4 flex space-x-6">
         <div>
-          <span className="font-bold">{user.followers}</span> Followers
+          <span className="font-bold">{user.followers}</span>{" "}
+          <span className="text-sm">Followers</span>
         </div>
         <div>
-          <span className="font-bold">{user.following}</span> Following
+          <span className="font-bold">{user.following}</span>{" "}
+          <span className="text-sm">Following</span>
         </div>
         <div>
-          <span className="font-bold">{user.public_repos}</span> Repos
+          <span className="font-bold">{user.public_repos}</span>{" "}
+          <span className="text-sm">Repos</span>
         </div>
       </div>
     </div>
