@@ -2,7 +2,7 @@ import React from "react";
 
 const UserProfile = ({ user }) => {
   return (
-    <div className="bg-gray-100 mx-auto my-20 shadow-lg rounded-lg overflow-hidden sm:p-4 md:p-8 max-w-xs md:max-w-sm">
+    <div className="bg-gray-100 mx-auto my-20 shadow-lg rounded-lg overflow-hidden sm:p-4 md:p-8 max-w-xs md:max-w-sm transition-shadow duration-300 ease-in-out hover:shadow-xl">
       <div className="flex items-center space-x-4">
         <img
           className="w-16 h-16 sm:w-24 sm:h-24 md:w-36 md:h-36 rounded-full object-cover hover:scale-110 transition-transform duration-300 ease-in-out"
