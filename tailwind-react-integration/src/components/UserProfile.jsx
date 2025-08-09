@@ -9,7 +9,7 @@ function UserProfile({ name, bio, image, onFollow, onMessage }) {
         className="mx-auto rounded-full w-24 h-24 sm:w-24 sm:h-24 md:w-36 md:h-36 object-cover mb-4 hover:scale-110 transition-transform duration-300 ease-in-out"
       />
 
-      <h2 className="mt-4 text-lg sm:text-lg md:text-xl font-semibold hover:text-blue-500 transition-colors duration-300 ease-in-out">
+      <h2 className="text-blue-800 my-4 text-lg sm:text-lg md:text-xl font-semibold hover:text-blue-500 transition-colors duration-300 ease-in-out">
         {name || "Anonymous User"}
       </h2>
 
