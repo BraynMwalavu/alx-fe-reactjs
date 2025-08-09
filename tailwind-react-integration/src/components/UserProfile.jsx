@@ -1,4 +1,4 @@
-function UserProfile() {
+export default function UserProfile() {
   return (
     <div className="mx-auto bg-white rounded-lg shadow-md 
                     p-4 sm:p-4 md:p-8 
@@ -11,7 +11,8 @@ function UserProfile() {
         alt="Profile"
         className="mx-auto rounded-full 
                    w-24 h-24 sm:w-24 sm:h-24 md:w-36 md:h-36 
-                   object-cover"
+                   object-cover
+                   hover:scale-110 transition-transform duration-300 ease-in-out"
       />
 
       {/* Name */}
@@ -28,5 +29,3 @@ function UserProfile() {
     </div>
   );
 }
-
-export default UserProfile;
