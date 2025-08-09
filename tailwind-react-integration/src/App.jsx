@@ -1,10 +1,11 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-//import './App.css'
+import { useState } from 'react';
+import reactLogo from './assets/react.svg';
+import viteLogo from '/vite.svg';
+// import './App.css';
+import UserProfile from './components/UserProfile';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <>
@@ -16,24 +17,34 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
+
       <h1 className="text-red-500 text-4xl font-bold">Vite + React</h1>
+
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        <button
+          onClick={() => setCount((count) => count + 1)}
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
           count is {count}
         </button>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
       </div>
+
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more.
       </p>
+
+      {/* Tailwind gradient section */}
       <div className="min-h-screen bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white text-2xl">
-      <p>Tailwind CSS is working!</p>
-    </div>
-      
+        <p>Tailwind CSS is working!</p>
+      </div>
+
+      {/* Task 1: UserProfile Component */}
+      <UserProfile />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
