@@ -19,7 +19,8 @@ const UserProfile = ({ user }) => {
         </div>
       </div>
       <div className="mt-4">
-        <p className="text-gray-800">{user.bio}</p>
+        {/* Added text-base for paragraph styling */}
+        <p className="text-base text-gray-800">{user.bio}</p>
       </div>
       <div className="mt-4 flex space-x-6">
         <div>
