@@ -5,7 +5,7 @@ const UserProfile = ({ user }) => {
     <div className="bg-white shadow-lg rounded-lg overflow-hidden sm:p-4 md:p-8 max-w-xs md:max-w-sm">
       <div className="flex items-center space-x-4">
         <img
-          className="w-16 h-16 rounded-full object-cover"
+          className="w-16 h-16 sm:w-24 sm:h-24 md:w-36 md:h-36 rounded-full object-cover"
           src={user.avatar_url}
           alt={`${user.name}'s avatar`}
         />
