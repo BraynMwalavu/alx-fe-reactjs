@@ -1,32 +1,35 @@
-export default function UserProfile() {
+import React from "react";
+
+function UserProfile() {
   return (
-    <div className="mx-auto bg-white rounded-lg shadow-md 
-                    p-4 sm:p-4 md:p-8 
-                    max-w-xs sm:max-w-xs md:max-w-sm 
-                    text-center">
-      
-      {/* Profile Image */}
+    <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-md hover:shadow-xl transition-transform duration-300 ease-in-out">
       <img
         src="https://via.placeholder.com/150"
-        alt="Profile"
-        className="mx-auto rounded-full 
-                   w-24 h-24 sm:w-24 sm:h-24 md:w-36 md:h-36 
-                   object-cover
-                   hover:scale-110 transition-transform duration-300 ease-in-out"
+        alt="User Profile"
+        className="w-32 h-32 rounded-full object-cover mb-4 hover:scale-110 transition-transform duration-300 ease-in-out"
       />
-
-      {/* Name */}
-      <h1 className="mt-4 font-bold 
-                     text-lg sm:text-lg md:text-xl
-                     hover:text-blue-500">
+      <h2 className="text-xl font-semibold mb-2 hover:text-blue-500 transition-colors duration-300 ease-in-out">
         John Doe
-      </h1>
-
-      {/* Bio */}
-      <p className="mt-2 text-gray-600 
-                    text-sm sm:text-sm md:text-base">
-        A passionate web developer with expertise in building responsive and user-friendly web applications.
+      </h2>
+      <p className="text-gray-600">
+        Frontend Developer
       </p>
+      <div className="mt-4 flex space-x-3">
+        <a
+          href="#"
+          className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-300 ease-in-out"
+        >
+          Follow
+        </a>
+        <a
+          href="#"
+          className="px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 transition-colors duration-300 ease-in-out"
+        >
+          Message
+        </a>
+      </div>
     </div>
   );
 }
+
+export default UserProfile;
