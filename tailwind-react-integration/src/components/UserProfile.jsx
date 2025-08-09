@@ -17,7 +17,8 @@ export default function UserProfile() {
 
       {/* Name */}
       <h1 className="mt-4 font-bold 
-                     text-lg sm:text-lg md:text-xl">
+                     text-lg sm:text-lg md:text-xl
+                     hover:text-blue-500">
         John Doe
       </h1>
 
