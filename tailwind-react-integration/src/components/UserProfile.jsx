@@ -1,4 +1,4 @@
-export default function UserProfile() {
+function UserProfile() {
   return (
     <div className="mx-auto bg-white rounded-lg shadow-md 
                     p-4 sm:p-4 md:p-8 
@@ -28,3 +28,5 @@ export default function UserProfile() {
     </div>
   );
 }
+
+export default UserProfile;
