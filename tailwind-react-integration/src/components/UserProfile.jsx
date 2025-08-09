@@ -2,7 +2,7 @@ import React from "react";
 
 function UserProfile({ name, bio, image, onFollow, onMessage }) {
   return (
-    <div className="bg-gray-100 p-8 max-w-sm mx-auto my-20 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out text-center">
+    <div className="bg-gray-100 sm:p-4 md:p-8 max-w-sm mx-auto my-20 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out text-center">
       <img
         src={image || "https://via.placeholder.com/150"}
         alt={`${name}'s Profile`}
