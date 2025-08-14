@@ -11,7 +11,12 @@ const HomePage = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-4xl font-bold text-center mb-8">Recipe Home</h1>
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-4xl font-bold">Recipe Home</h1>
+        <Link to="/add-recipe" className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+          Add New Recipe
+        </Link>
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {recipes.map(recipe => (
           <Link to={`/recipe/${recipe.id}`} key={recipe.id} className="block">
