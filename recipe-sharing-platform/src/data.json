@@ -3,24 +3,81 @@
     "id": 1,
     "title": "Spaghetti Carbonara",
     "summary": "A classic Italian pasta dish with eggs, cheese, bacon, and black pepper.",
-    "image": "https://via.placeholder.com/400x300.png?text=Spaghetti+Carbonara"
+    "image": "https://via.placeholder.com/600x400.png?text=Spaghetti+Carbonara",
+    "ingredients": [
+      "Spaghetti",
+      "Eggs",
+      "Pecorino or Parmesan cheese",
+      "Guanciale or pancetta",
+      "Black pepper"
+    ],
+    "instructions": [
+      "Cook the spaghetti according to package directions.",
+      "While pasta is cooking, sauté the guanciale until crispy.",
+      "In a separate bowl, whisk eggs, cheese, and pepper.",
+      "Drain the pasta, reserving some pasta water. Add to the pan with the guanciale.",
+      "Remove from heat, quickly mix in the egg mixture and a splash of pasta water to create a creamy sauce. Serve immediately."
+    ]
   },
   {
     "id": 2,
     "title": "Chicken Tikka Masala",
     "summary": "Chunks of grilled chicken (tikka) cooked in a smooth buttery & creamy tomato based gravy.",
-    "image": "https://via.placeholder.com/400x300.png?text=Chicken+Tikka+Masala"
+    "image": "https://via.placeholder.com/600x400.png?text=Chicken+Tikka+Masala",
+    "ingredients": [
+      "Chicken breast",
+      "Yogurt",
+      "Ginger and garlic paste",
+      "Garama masala",
+      "Cumin powder",
+      "Canned tomatoes",
+      "Heavy cream"
+    ],
+    "instructions": [
+      "Marinate chicken in yogurt and spices for at least 30 minutes.",
+      "Grill or pan-fry the chicken until cooked through.",
+      "Sauté onions, ginger, and garlic, then add spices and tomatoes.",
+      "Simmer the sauce, then stir in the heavy cream and cooked chicken. Serve with rice or naan."
+    ]
   },
   {
     "id": 3,
     "title": "Fresh Garden Salad",
     "summary": "A refreshing salad with crisp lettuce, tomatoes, cucumbers, and a light vinaigrette.",
-    "image": "https://via.placeholder.com/400x300.png?text=Garden+Salad"
+    "image": "https://via.placeholder.com/600x400.png?text=Garden+Salad",
+    "ingredients": [
+      "Mixed greens",
+      "Cherry tomatoes",
+      "Cucumber",
+      "Red onion",
+      "Feta cheese (optional)",
+      "Vinaigrette dressing"
+    ],
+    "instructions": [
+      "Wash and chop all vegetables.",
+      "Combine all ingredients in a large bowl.",
+      "Drizzle with vinaigrette and toss gently to coat. Serve immediately."
+    ]
   },
   {
     "id": 4,
     "title": "Vegetable Stir-Fry",
     "summary": "A quick and healthy stir-fry with a variety of colorful vegetables and a savory sauce.",
-    "image": "https://via.placeholder.com/400x300.png?text=Stir-Fry"
+    "image": "https://via.placeholder.com/600x400.png?text=Stir-Fry",
+    "ingredients": [
+      "Broccoli florets",
+      "Bell peppers",
+      "Carrots",
+      "Snap peas",
+      "Soy sauce",
+      "Ginger",
+      "Garlic"
+    ],
+    "instructions": [
+      "Heat a wok or large pan with oil.",
+      "Add vegetables and stir-fry for 5-7 minutes until tender-crisp.",
+      "Add ginger and garlic, stir for one minute.",
+      "Pour in soy sauce and toss everything to combine. Serve over rice."
+    ]
   }
 ]
