@@ -6,13 +6,16 @@ const AddRecipeForm = () => {
     summary: '',
     image: '',
     ingredients: '',
-    steps: '', // Changed from 'instructions' to 'steps'
+    steps: '', 
   });
 
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    
+    const { name } = e.target;
+    const value = e.target.value;
+
     setFormData(prevState => ({
       ...prevState,
       [name]: value,
@@ -24,7 +27,7 @@ const AddRecipeForm = () => {
     if (!formData.title) newErrors.title = 'Title is required';
     if (!formData.summary) newErrors.summary = 'Summary is required';
     if (!formData.ingredients) newErrors.ingredients = 'Ingredients are required';
-    if (!formData.steps) newErrors.steps = 'Steps are required'; // Changed from 'instructions' to 'steps'
+    if (!formData.steps) newErrors.steps = 'Preparation steps are required'; 
     return newErrors;
   };
 
