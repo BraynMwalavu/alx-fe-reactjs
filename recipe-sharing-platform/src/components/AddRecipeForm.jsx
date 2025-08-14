@@ -6,7 +6,7 @@ const AddRecipeForm = () => {
     summary: '',
     image: '',
     ingredients: '',
-    instructions: '',
+    steps: '', // Changed from 'instructions' to 'steps'
   });
 
   const [errors, setErrors] = useState({});
@@ -24,7 +24,7 @@ const AddRecipeForm = () => {
     if (!formData.title) newErrors.title = 'Title is required';
     if (!formData.summary) newErrors.summary = 'Summary is required';
     if (!formData.ingredients) newErrors.ingredients = 'Ingredients are required';
-    if (!formData.instructions) newErrors.instructions = 'Instructions are required';
+    if (!formData.steps) newErrors.steps = 'Steps are required'; // Changed from 'instructions' to 'steps'
     return newErrors;
   };
 
@@ -32,7 +32,6 @@ const AddRecipeForm = () => {
     e.preventDefault();
     const validationErrors = validate();
     if (Object.keys(validationErrors).length === 0) {
-      // Form is valid, you can now process the data
       console.log('Form submitted:', formData);
       alert('Recipe submitted successfully!');
       setFormData({
@@ -40,7 +39,7 @@ const AddRecipeForm = () => {
         summary: '',
         image: '',
         ingredients: '',
-        instructions: '',
+        steps: '', 
       });
       setErrors({});
     } else {
@@ -108,18 +107,18 @@ const AddRecipeForm = () => {
           {errors.ingredients && <p className="text-red-500 text-xs italic mt-2">{errors.ingredients}</p>}
         </div>
         
-        {/* Instructions Input */}
+        {/* Steps Input */}
         <div className="mb-6">
-          <label htmlFor="instructions" className="block text-gray-700 text-sm font-bold mb-2">Instructions (one step per line)</label>
+          <label htmlFor="steps" className="block text-gray-700 text-sm font-bold mb-2">Preparation Steps (one step per line)</label>
           <textarea
-            id="instructions"
-            name="instructions"
-            value={formData.instructions}
+            id="steps"
+            name="steps"
+            value={formData.steps}
             onChange={handleChange}
             rows="8"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           ></textarea>
-          {errors.instructions && <p className="text-red-500 text-xs italic mt-2">{errors.instructions}</p>}
+          {errors.steps && <p className="text-red-500 text-xs italic mt-2">{errors.steps}</p>}
         </div>
         
         {/* Submit Button */}
