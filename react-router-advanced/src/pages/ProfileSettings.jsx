@@ -1,3 +1,10 @@
+import React from "react";
+
 export default function ProfileSettings() {
-  return <p>Here you can update your profile settings.</p>;
+  return (
+    <div>
+      <h3>Profile Settings</h3>
+      <p>This is where user settings would go.</p>
+    </div>
+  );
 }
