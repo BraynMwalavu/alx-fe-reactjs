@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import Profile from "./components/Profile";
 import ProfileDetails from "./pages/ProfileDetails";
 import ProfileSettings from "./pages/ProfileSettings";
-import BlogPost from "./pages/BlogPost";
+import BlogPost from "./components/BlogPost";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
         </Route>
 
         {/* Dynamic routing */}
-        <Route path="/blog/:postId" element={<BlogPost />} />
+        <Route path="/blog/:id" element={<BlogPost />} />
       </Routes>
     </BrowserRouter>
   );
