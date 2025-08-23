@@ -1,37 +1,38 @@
-import { Routes, Route, Link } from "react-router-dom";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Profile from "./pages/Profile";
-import BlogPost from "./pages/BlogPost";
+// src/App.jsx
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./components/Home";
+import Profile from "./components/Profile";
+import ProfileDetails from "./components/ProfileDetails";
+import ProfileSettings from "./components/ProfileSettings";
+import BlogPost from "./components/BlogPost";
 import ProtectedRoute from "./components/ProtectedRoute";
 
-export default function App() {
+function App() {
   return (
-    <div>
-      <nav className="p-4 bg-gray-800 text-white flex gap-4">
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
-        <Link to="/profile">Profile</Link>
-        <Link to="/posts/1">Blog Post 1</Link>
-      </nav>
-
+    <BrowserRouter>
       <Routes>
+        {/* Public routes */}
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
 
-        {/* Protected Route */}
+        {/* Protected routes */}
         <Route
-          path="/profile/*"
+          path="/profile"
           element={
             <ProtectedRoute>
               <Profile />
             </ProtectedRoute>
           }
-        />
+        >
+          <Route path="details" element={<ProfileDetails />} />
+          <Route path="settings" element={<ProfileSettings />} />
+        </Route>
 
-        {/* Dynamic Route */}
-        <Route path="/posts/:postId" element={<BlogPost />} />
+        {/* Dynamic routing */}
+        <Route path="/blog/:postId" element={<BlogPost />} />
       </Routes>
-    </div>
+    </BrowserRouter>
   );
 }
+
+export default App;
