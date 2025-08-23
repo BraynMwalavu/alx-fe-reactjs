@@ -5,17 +5,29 @@ export default function RegistrationForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState({});
   const [success, setSuccess] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
+    setErrors({});
     setSuccess("");
 
-    if (!username || !email || !password) {
-      setError("All fields are required");
+    const newErrors = {};
+
+    if (!username) {
+      newErrors.username = "Username is required";
+    }
+    if (!email) { 
+      newErrors.email = "Email is required";
+    }
+    if (!password) { 
+      newErrors.password = "Password is required";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors); 
       return;
     }
 
@@ -35,7 +47,7 @@ export default function RegistrationForm() {
       setEmail("");
       setPassword("");
     } catch (err) {
-      setError("Registration failed. Please try again.");
+      setErrors({ submit: "Registration failed. Please try again." });
     } finally {
       setSubmitting(false);
     }
@@ -51,7 +63,7 @@ export default function RegistrationForm() {
           Create an Account
         </h2>
 
-        {error && <p className="text-red-600 text-sm text-center">{error}</p>}
+        {errors.submit && <p className="text-red-600 text-sm text-center">{errors.submit}</p>}
         {success && <p className="text-green-600 text-sm text-center">{success}</p>}
 
         <div>
@@ -62,11 +74,12 @@ export default function RegistrationForm() {
             id="username"
             name="username"
             type="text"
-            value={username}                 
+            value={username}
             onChange={(e) => setUsername(e.target.value)}
             className="mt-1 w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600"
             placeholder="your_username"
           />
+          {errors.username && <p className="text-red-500 text-sm">{errors.username}</p>}
         </div>
 
         <div>
@@ -77,11 +90,12 @@ export default function RegistrationForm() {
             id="email"
             name="email"
             type="email"
-            value={email}                    
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="mt-1 w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600"
             placeholder="you@example.com"
           />
+          {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
         </div>
 
         <div>
@@ -92,11 +106,12 @@ export default function RegistrationForm() {
             id="password"
             name="password"
             type="password"
-            value={password}                 
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="mt-1 w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600"
             placeholder="••••••••"
           />
+          {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
         </div>
 
         <button
