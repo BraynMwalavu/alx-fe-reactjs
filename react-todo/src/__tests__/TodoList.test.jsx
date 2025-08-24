@@ -1,4 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
+import "@testing-library/jest-dom"; // gives you extra matchers like toBeInTheDocument
 import TodoList from "../components/TodoList";
 
 describe("TodoList Component", () => {
@@ -10,8 +11,8 @@ describe("TodoList Component", () => {
 
   test("can add a new todo", () => {
     render(<TodoList />);
-    const input = screen.getByPlaceholderText("New todo");
-    const button = screen.getByText("Add Todo");
+    const input = screen.getByPlaceholderText(/new todo/i);
+    const button = screen.getByRole("button", { name: /add todo/i });
 
     fireEvent.change(input, { target: { value: "Test Todo" } });
     fireEvent.click(button);
@@ -28,8 +29,9 @@ describe("TodoList Component", () => {
 
   test("can delete a todo", () => {
     render(<TodoList />);
-    const deleteButton = screen.getAllByText("Delete")[0];
+    const deleteButton = screen.getAllByRole("button", { name: /delete/i })[0];
     fireEvent.click(deleteButton);
+
     expect(screen.queryByText("Learn React")).not.toBeInTheDocument();
   });
 });
