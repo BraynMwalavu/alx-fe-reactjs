@@ -1,30 +1,35 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import TodoList from "../components/TodoList";
 
-test("renders initial todos", () => {
-  render(<TodoList />);
-  expect(screen.getByText("Learn React")).toBeInTheDocument();
-  expect(screen.getByText("Build a Todo App")).toBeInTheDocument();
-});
-
-test("can add a new todo", () => {
-  render(<TodoList />);
-  fireEvent.change(screen.getByPlaceholderText("Add a new todo"), {
-    target: { value: "New Task" },
+describe("TodoList Component", () => {
+  test("renders initial todos", () => {
+    render(<TodoList />);
+    expect(screen.getByText("Learn React")).toBeInTheDocument();
+    expect(screen.getByText("Build a Todo App")).toBeInTheDocument();
   });
-  fireEvent.click(screen.getByText("Add"));
-  expect(screen.getByText("New Task")).toBeInTheDocument();
-});
 
-test("can toggle a todo", () => {
-  render(<TodoList />);
-  const todo = screen.getByText("Learn React");
-  fireEvent.click(todo);
-  expect(todo).toHaveStyle("text-decoration: line-through");
-});
+  test("can add a new todo", () => {
+    render(<TodoList />);
+    const input = screen.getByPlaceholderText("New todo");
+    const button = screen.getByText("Add Todo");
 
-test("can delete a todo", () => {
-  render(<TodoList />);
-  fireEvent.click(screen.getAllByText("Delete")[0]);
-  expect(screen.queryByText("Learn React")).not.toBeInTheDocument();
+    fireEvent.change(input, { target: { value: "Test Todo" } });
+    fireEvent.click(button);
+
+    expect(screen.getByText("Test Todo")).toBeInTheDocument();
+  });
+
+  test("can toggle a todo", () => {
+    render(<TodoList />);
+    const todo = screen.getByText("Learn React");
+    fireEvent.click(todo);
+    expect(todo).toHaveStyle("text-decoration: line-through");
+  });
+
+  test("can delete a todo", () => {
+    render(<TodoList />);
+    const deleteButton = screen.getAllByText("Delete")[0];
+    fireEvent.click(deleteButton);
+    expect(screen.queryByText("Learn React")).not.toBeInTheDocument();
+  });
 });
